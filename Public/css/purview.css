@@ -1,0 +1,31 @@
+/* 
+    Document   : purview
+    Created on : 2012-7-24, 14:37:29
+    Author     : tom.wang
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.node, .board {
+    background: url("../images/bg_repno.gif") no-repeat scroll -240px -550px transparent;
+    padding-left: 55px;
+}
+
+lastchildboard {
+    background: url("../images/bg_repno.gif") no-repeat scroll -185px -600px transparent;
+    padding-left: 110px;
+}
+
+.txt{
+    margin-right: 10px;
+    width: 100px;
+    vertical-align: middle;
+    border-color: #666666 #CCCCCC #CCCCCC #666666;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+
+
+

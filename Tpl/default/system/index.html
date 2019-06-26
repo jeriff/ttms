@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- layout::layout:header_do::0 -->
+        <title>{$Think.config.title_oms_version}--项目管理</title>
+        <style type="text/css">
+            
+            #dh {width:1100px;;margin: 0 auto;}
+            #dbconnection {font-size:15px; border-style:dashed;border-width:1px;}
+            #othersconnection {font-size:15px;}
+            .btn1{
+              border-style:dashed;border-width:1px;
+            }
+           
+        </style>
+    </head>
+    <body>
+        <!-- layout::layout:header::0 -->
+        <div id="quick_menu_box" style="border-bottom: 1px solid #81afd9;">
+            <a href="?m=system&a=index"><img src="Public/Images/config.png" width="20px" height="20px" style="vertical-align:middle" border="0" />数据库配置</a>
+		<span style="color:#98c8ff; padding:0 5px;">|</span>
+		<a href="?m=system&a=menu"><img src="Public/Images/dictionary.gif" width="20px" height="20px" style="vertical-align:middle" border="0" />数据字典</a>
+	</div>
+        <div id="system_menu">
+            <span id="dbconnection" class=""><a href="#">数据库连接</a></span> &nbsp;<span id="othersconnection" class=""><a href="#">其他配置</a></span>	
+        </div>
+        <div style="width: 100%;">
+                  <form action="__APP__?m=system&a=edit" method="POST">
+                   
+                    <div id="dbcon">
+                        
+                        {$arr1.DB_TYPE}
+                        {volist name="arr1" id="vo"}
+                        {$vo.title}
+                        {/volist}
+                    <table style="width:98%;margin: 0 auto;margin-top: 10px;" id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+                        <tr>
+                            <td width="100px" >数据库：</td>
+                             <td>
+                                <select id="database" name="DB_TYPE">
+                                <option id="mysql" value="Mysql"> Mysql</option>
+                                <option id="oracle" value="Oracle"> Oracle</option>
+                                <option id="sql" value="Sql"> Sql</option>
+                                </select>
+                             </td>
+                        <tr>
+                          <tr>
+                              <td>服务器：</td>
+                               <td>
+                                   {$server}
+                               </td>
+                        <tr>
+                            <tr>
+                                <td>用户名：</td>
+                                <td><input type="text" name="DB_USER" id="username" value="{$con.DB_USER}" ></input></td>
+                            </tr>
+                            <tr>
+                                <td>密码：</td>
+                                <td><input type="text" name="DB_PWD" id="password" value="{$con.DB_PWD}" ></input></td>
+                            </tr>
+                             <tr>
+                                 <td >数据库名：</td>
+                                <td><input type="text" name="DB_NAME" id="username" value="{$con.DB_NAME}" ></input></td>
+                            </tr>
+                             <tr>
+                                 <td>数据库前缀：</th>
+                                <td><input type="text" name="DB_PREFIX" id="prefix" value="{$con.DB_PREFIX}"></td>
+                            </tr>
+                            <tr>
+                                <td>数据库后缀：</td>
+                                <td><input type="text" name="DB_SUFFIX" id="suffix" value="{$con.DB_SUFFIX}"></td>
+                            </tr>
+                            </table>
+                        </div>
+                    
+                    <div id="others" style="display: none;margin-bottom: 10px">
+                        <table style="width:98%;margin: 0 auto;margin-top: 10px;" id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+                            <tr>
+                                <td width="100px">版权信息:</td>
+                                <td><input type="text" name="title_all_rights" id="copyright" value="{$con.title_all_rights}" style="width:500px"></td>
+                            </tr>
+                             <tr>
+                                 <td>系统名字:</td>
+                                <td><input type="text" name="title_oms_version" id="vesion" value="{$con.title_oms_version}" style="width:500px" /></td>
+                            </tr>
+                            
+                            <tr>
+                                 <td>Cookie前缀:</td>
+                                <td><input type="text" name="COOKIE_PREFIX" id="Cookiesprefix" value="{$con.COOKIE_PREFIX}" style="width:500px" /></td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    <div class="button_btn">
+                        <input type="submit" name="submit" id="add" value="保存" class="btn" />
+                        <input type="button" value="取消" class="btncancel" />
+                    </div>
+                </form>
+           
+            </div>
+        
+    <script>
+        $('.btncancel').live('click',function(){
+            window.location = '?m=index&a=index';
+            return false;
+        });
+        $('#othersconnection').click(function(){
+            $('#dbcon').css("display","none");
+            $('#others').css("display","block");
+            $('#othersconnection').addClass("btn1");
+            $('#dbconnection').removeClass("btn1");
+            $('#dbconnection').css('border-style',"none");
+        })
+         $('#dbconnection').click(function(){
+            $('#dbcon').css("display","block");
+            $('#others').css("display","none");
+            $('#dbconnection').addClass("btn1");
+            $('#dbconnection').css({'border-style':"dashed",'border-width':"1px"});
+            $('#othersconnection').removeClass("btn1")
+        })
+    </script>
+        <!-- layout::layout:footer::0 -->
+    </body>
+</html>

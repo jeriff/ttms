@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- layout::layout:header_do::0 -->
+    <title>时间&任务管理系统 TTMS--任务查看</title> 
+</head>
+<body>
+<!-- layout::layout:header::0 -->
+<div class="mainblock">
+<div id="quick_menu_box" style="border-bottom:1px solid #81afd9;">
+<h3 style="margin-top:0px;color:#0c3a86;">任务查看</h3>
+</div>
+<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1" style="width:98%;margin: 0 auto;margin-top: 10px;">
+	<tr>
+		<td>任务名称：</td>
+		<td>{$view[0]['task_name']}</td>
+		<td>类别：</td>
+		<td>{$view[0]['task_category']}</td>
+	</tr>
+	<tr>
+		<td>所属项目：</td>
+		<td>{$project_view['project_name']}</td>
+		<td>任务进度：</td>
+		<td>{$task['task_attribute'][$view[0]['task_attribute']]}</td>
+	</tr>
+	<tr>
+		<td>开始时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="begin_time" name="begin_time" value="{$view[0]['begin_time']}"/></td>
+		<td>结束时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="end_time" name="end_time" value="{$view[0]['end_time']}"/></td>
+	</tr>
+	<tr>
+		<td>截止时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="end_time" name="end_time" value="{$view[0]['espiration_time']}"/></td>
+		<td>完成时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="over_time" name="over_time" value="{$view[0]['over_time']}"/></td>
+	</tr>
+	<tr>
+		<td>预计工时：</td>
+		<td>{$view[0]['man_day']} &nbsp;小时</td>
+		<td>实际执行工时：</td>
+		<td>{$view[0]['actual_man_day']} &nbsp;小时</td>
+	</tr>
+	<tr>
+		<td>任务范围：</td>
+		<td>{$task['task_biling_type'][$view[0]['task_biling_type']]}</td>
+		<td>任务优先级：</td>
+		<td>{$task['task_priority'][$view[0]['task_priority']]}</td>
+	</tr>
+	<tr>
+		<td>任务类型：</td>
+		<td>{$task['task_type'][$view[0]['task_type']]}</td>
+		<td>任务状态：</td>
+		<td>{$task['task_status'][$view[0]['task_status']]}</td>
+	</tr>
+	<tr>
+		<td>是否收费：</td>
+		<td>{$task['task_biling'][$view[0]['task_biling']]}</td>
+		<td>收费标准：</td>
+		<td>{$task['task_biling_money'][$view[0]['task_biling_money']]}</td>
+	</tr>
+	<tr>
+		<td>分配人：</td>
+		<td>{$view[0]['assignment']}</td>
+		<td>任务执行人：</td>
+		<td>{$view[0]['operator']}</td>
+	</tr>
+	<tr>
+		<td>任务描述：</td>
+		<td><textarea style="width:95%;height:100px;" id="task_subject" name="task_subject">{$view[0]['task_subject']}</textarea></td>
+		<td>备注：</td>
+		<td><textarea style="width:95%;height:100px;" id="remark" name="remark">{$view[0]['remark']}</textarea></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+		<center>
+		<input type="button" onclick="window.location = '?m=task&a=index'" id="" class="btncancel" name="" value="返回" />
+		</center>
+		</td>
+	</tr>
+</table>
+<div {if condition="$view_other eq ''"}style="display:none;"{/if}>
+<div id="quick_menu_box" style="border-bottom:1px solid #81afd9;">
+<h3 style="margin-top:0px;color:#0c3a86;">{$title}</h3>
+</div>
+	<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+			<tr>
+				<th>任务名称</th>
+				<th>优先级</th>
+				<th>状态</th>
+				<th>分配人</th>
+				<th>执行人</th>
+				<th>开始时间</th>
+				<th>结束时间</th>
+				<th>截止时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="view_other" id="vo"}
+			<tr>
+				<td>{$vo['task_name']}
+				</td>
+				<td><?php echo $task['task_priority'][$vo['task_priority']]; ?></td>
+				<td><?php echo $task['task_status'][$vo['task_status']]; ?></td>
+				<td>{$vo['assignment']}</td>
+				<td>{$vo['operator']}</td>
+				<td>{$vo['begin_time']}</td>
+				<td>{$vo['end_time']}</td>
+				<td>{$vo['espiration_time']}</td>
+			</tr>
+			{/volist}
+		</tbody>
+	</table>
+</div>
+<div>
+<script>
+$("input.Wdate").live('click', function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+</script>
+<!-- layout::layout:footer::0 -->
+</body>
+
+</html>

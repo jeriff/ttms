@@ -1,0 +1,73 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>时间&任务管理系统 TTMS--登陆</title>
+        <!-- blueprint CSS framework -->
+        <!--
+        <link rel="stylesheet" type="text/css" href="Public/css/screen.css" media="screen, projection" />
+        <link rel="stylesheet" type="text/css" href="Public/css/print.css" media="print" />
+        <link rel="stylesheet" type="text/css" href="Public/css/form.css" />-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="Public/css/ie.css" media="screen, projection" />
+        <![endif]-->
+        <!--[if IE 6]>
+        <script src="Public/js/DD_belatedPNG_0.0.8a-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            DD_belatedPNG.fix('.bg');
+        </script>
+<![endif]-->
+        <style>
+            body{ margin:0px; padding:0px; background:url(Public/Images/bg.jpg) repeat;}
+            body,tr,td,form,div,ul,li{margin:0px;padding:0px;}
+            body,tr,td,div,li,input,text{font-size:12px;}
+            table{margin:0 auto;}
+            .bg {margin:100px auto;width:486px;height: 345px;background:url(Public/Images/login_box.png) no-repeat;}
+        </style>
+    </head>
+    <body>
+        
+        <form id="" method="post" action="" style="margin:0px; padding:0px;" >
+            <div class="bg">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td  height="20"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td height="90"></td>
+                        <td align="center" style="font-size:24px; color:#014f97; font-family:Arial, '宋体'; font-weight:bold; text-align:left; vertical-align:middle"><?php echo (C("title_oms_version")); ?></td>
+                    </tr>
+                    <tr>
+                        <td  height="20" width="160" style="margin: 0px;"></td>
+                        <td width="326"></td>
+                    </tr>
+                    <tr>
+                        <td height="18" width="160"></td>
+                        <td align="left"><input type="text" id="username" name="username" style="border-style:none; border:0px; background:transparent; color:#014f97;font-size:12px;width:210px; height:24px; line-height: 20px; padding: 0px;" /></td>
+                    </tr>
+                    <tr>
+                        <td height="19" style="margin: 0px;padding: 0px;"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td height="18" width="160"></td>
+                        <td align="left"><input type="password" id="password" name="password" style="border-style:none;border:0px; background:transparent; color:#014f97;font-size:12px;width:210px;height:24px; line-height: 20px; padding:0px;" /></td>
+                    </tr>
+                    <tr>
+                        <td height="20" style=" padding: 0px;"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td height="69" style="vertical-align:middle;" align="center" colspan="2"><label>
+                                <input type="image" name="imageField" id="imageField" src="Public/Images/login.jpg" style="border-style:none; padding:0; " />
+                            </label></td>
+                    </tr>
+                    <tr>
+                        <td height="30" colspan="2" align="center" valign="middle" style="color:#FFF; font-size:12px; font-family:Arial,'宋体'; vertical-align:middle;"><?php echo (C("title_all_rights")); ?></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </body>
+</html>

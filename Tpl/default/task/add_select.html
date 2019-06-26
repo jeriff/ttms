@@ -1,0 +1,35 @@
+<div>
+<form action="__APP__?m=task&a=add_select" method="POST" id="task_add" name="task_add">
+	<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<tr>
+			<td>任务属性：</td>
+			<td><label>一般任务：<input type="radio" id="check_select" name="check_select" value="1" /></label><br>
+				<label>周期任务：<input type="radio" id="check_select" name="check_select" value="2" /></label><br>
+				<label>例行任务：<input type="radio" id="check_select" name="check_select" value="3" /></label><br>
+				<table id="check" style="display:none" >
+				<tr>
+				<td colspan="4">
+					<label><input type="checkbox" id="task_name" name="task_name[]" value="Email_Check" />Email_Check</label><br>
+					<label><input type="checkbox" id="task_name" name="task_name[]" value="DB_Check" />DB_Check</label><br>
+					<label><input type="checkbox" id="task_name" name="task_name[]" value="APP_Check" />APP_Check</label><br>
+				</td>
+				</tr>
+				<!--<tr>
+					<td>开始时间：</td>
+					<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="begin_time" name="begin_time" value=""/></td>
+					<td>结束时间：</td>
+					<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="end_time" name="end_time" value=""/></td>
+				</tr>-->
+				</table>
+				</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<center>
+			<input type="submit" id="" name="" class="btn" value="提交" />
+			</center>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>

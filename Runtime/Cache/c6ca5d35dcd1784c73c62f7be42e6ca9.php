@@ -1,0 +1,203 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- layout::layout:header_do::0 -->
+    <script src="./Public/js/ckeditor/ckeditor.js"></script>
+	<script>
+	CKEDITOR.replace( 'document_remark',
+	{
+		skin : 'office2003'
+	});
+	</script>
+	<title>时间&任务管理系统 TTMS--文档添加</title> 
+</head>
+<body>
+<!-- layout::layout:header::0 -->
+<div id="quick_menu_box" style="border-bottom:1px solid #81afd9;">
+<h3 style="margin-top:0px;color:#0c3a86;">文档添加</h3>
+</div>
+<div class="mainblock">
+<form action="__APP__?m=document&a=add" method="POST" enctype="multipart/form-data" id="document_add" name="document_add">
+	<input type="hidden" id="id" name="id" value="<?php echo ($old_data['id']); ?>" />
+<table style="width:98%;margin: 0 auto;margin-top: 10px;" id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+	<tr>
+		<td>文档名称</td>
+		<td><input type="text" id="document_name" name="document_name" value="<?php echo ($old_data['document_name']); ?>"/></td>
+	</tr>
+	<tr>
+		<td>是否公开</td>
+		<td colspan="3"><?php echo ($document_open); ?></td>
+	</tr>
+	<tr>
+		<td>所属项目</td>
+		<td colspan="3"><?php echo ($project_name); ?></td>
+	</tr>
+	<tr>
+		<td>原文件名称</td>
+		<td>
+		<input type="text" name="document_old_file" id="filename_org" value="<?php echo ($old_data['document_old_file']); ?>" readonly="readonly" style="width:300px;" />
+		</td>
+	</tr>
+	<tr>
+		<td>文件名称</td>
+		<td>
+		<input type="text" name="document_file" id="filename" value="<?php echo ($old_data['document_file']); ?>" style="width:300px;" />
+		<?php if($act != 'view'){ ?>
+		<input type="button" class="btn" id="" name="" value="上传" onclick="myShowWin()"/>
+		<?php } ?>
+		</td>
+	</tr>
+	<tr>
+		<td>文件大小</td>
+		<td>
+		<input type="text" name="document_size" id="document_size" value="<?php echo ($old_data['document_size']); ?>" />
+		</td>
+	</tr>
+	<tr>
+		<td>文件格式</td>
+		<td>
+		<input type="text" name="document_format" id="document_format" value="<?php echo ($old_data['document_format']); ?>" />
+		</td>
+	</tr>
+	<tr>
+		<td>文档类型</td>
+		<td><?php echo ($document_type); ?></td>
+	</tr>
+	<tr>
+		<td>机密性等级</td>
+		<td><?php echo ($document_secret); ?></td>
+	</tr>
+	<tr>
+		<td>完整性等级</td>
+		<td><?php echo ($document_whole); ?></td>
+	</tr>
+	<tr>
+		<td>可用性等级</td>
+		<td><?php echo ($document_use); ?></td>
+	</tr>
+	<tr>
+		<td>文档内容</td>
+		<td><textarea  class="ckeditor" id="document_remark" name="document_remark" style="width:300px;height:100px" ><?php echo ($old_data['document_remark']); ?></textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<center>
+		<?php if($act != 'view'){ ?>
+			<input type="submit" class="btn" value="提交"/>
+		<?php } ?>
+			<input type="button" class="btncancel" onclick="window.location = '?m=document&a=index'" value="返回" />
+		</center>
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+<?php if(!empty($old_data_list)){ ?>
+<div class="mainblock" style="width:98%;margin: 0 auto;margin-top: 10px;">
+	<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+			<tr>
+				<th>文档名称</th>
+				<th>所属项目</th>
+				<th>文件名称</th>
+				<th>原文件名称</th>
+				<th>版本</th>
+				<th>文档类型</th>
+				<th>文件格式</th>
+				<th>创建改人</th>
+				<th>创建日期</th>
+				<th align="center">操作</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<?php if(is_array($old_data_list)): $i = 0; $__LIST__ = $old_data_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): ++$i;$mod = ($i % 2 )?><tr>
+				<td><?php echo ($vo['document_name']); ?></td>
+				<td><?php echo ($vo['project_name']); ?></td>
+				<td><a href="./Public/Upload/<?php echo ($vo['document_file']); ?>" ><?php echo ($vo['document_file']); ?></a></td>
+				<td><?php echo ($vo['document_old_file']); ?></td>
+				<td>第<?php echo ($vo['document_version']); ?>个版本</td>
+				<td><?php echo ($vo['document_type']); ?></td>
+				<td><?php echo ($vo['document_format']); ?></td>
+				<td><?php echo ($vo['created']); ?></td>
+				<td><?php echo ($vo['created_by']); ?></td>
+				<td>
+				<center>
+					<a id="view" title="查看" href="?m=document&a=add&id=<?php echo ($vo['id']); ?>&act=view"><img src="Public/Images/view.png" style="vertical-align:middle" border="0" title="查看"/></a>
+				</center>
+				</td>
+			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+		</tbody>
+	</table>
+<center>
+<div class="pageNav"><?php echo ($page); ?></div>
+</center>
+</div>
+<?php } ?>
+<script>
+function myShowWin() {    
+	var src = 'Lib/Org/upload.php?return_to=filename&return_to_org=filename_org&save_to=&file_format=gif|jpg|jpeg|png|bmp|rar|txt|doc|xls|xlsx|docx|ppt|pptx|zip|7z&call_back=chk_file';
+	var mydialog = art.dialog({       
+		lock: true,        
+		title: '文件导入',       
+		width: 460,       
+		content: '<iframe width="460" height="300" frameborder="0" scrolling="no" src="'+src+'"></iframe>'    
+	});
+}
+
+function chk_file(a,b,c,d,e,f) {
+	var lastname= a.substring(a.lastIndexOf(".")+1).toLowerCase();
+	$("#document_size").val(c);
+	$("#document_format").val(lastname);
+}
+$('#document_add').live('submit',function(){
+	//文档名称不能为空 
+	var document_name = $("#document_name").val();
+	if(document_name == ''){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '文档名称不能为空~'
+		});
+		$("#document_name").focus();
+		return false;
+	}
+	//文档范围不能为空
+	var project_name = $("input[name='project_name']:checked").val();
+	if(!project_name){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '文档所属项目不能为空~'
+		});
+		return false;
+	}
+	var document_type = $("#document_type").val();
+	if(!document_type){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '文档类型不能为空~'
+		});
+		return false;
+	}
+	//文档描述
+	var document_remark = $("#document_remark").val();
+	if(document_remark == ''){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请对文档进行描述~'
+		});
+		return false;
+	}
+});
+</script>
+<!-- layout::layout:footer::0 -->
+</body>
+</html>

@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+body,form,div,ul,li{margin:0px; padding:0px;}
+li{ list-style-type:none;}
+body{ background:#e0eaf7; font-size:12px; font-family:Arial, "宋体";color:#383838;}
+#top_box_up{background:url(../images/top1_bg.jpg) repeat-x; height:37px; margin:0px auto;}
+#top_box_up td span.ttms{ color:#b1cbea; font-size:16px; font-weight:bold;}
+#top_box_up td span,#top_box_up td a{ color:#b1cbea; text-decoration:none;}
+#top_box_down{background:url(../images/top2_bg.jpg) repeat-x; height:54px; margin:0px auto;}
+#top_box_down .top_menu{ height:54px;}
+.top_menu li{height:54px; float:left; margin-right:7px; line-height:65px; padding-left:7px; text-align:center;}
+.top_menu li a{color:#fff; text-decoration:none;font-weight:bold; font-size:16px; display:inline-block; float:left; width:110px; padding-left:10px;}
+.top_menu li.current{background:url(../images/menu_l_bg.jpg) repeat-x;}
+.top_menu li.current a{ color:#0c3a86;}
+.top_menu li.current span{background:url(../images/menu_r_bg.jpg) left no-repeat; display:inline-block; float:left; height:54px; width:8px;}
+
+
+
+a.icon_1{background:url(../images/ico/calendar.png) left no-repeat;}
+a.icon_2{background:url(../images/ico/task.png) left no-repeat;}
+a.icon_3{background:url(../images/ico/Home.png) left no-repeat;}
+a.icon_4{background:url(../images/ico/Home.png) left no-repeat;}
+a.icon_5{background:url(../images/ico/server.png) left no-repeat;}
+a.icon_6{background:url(../images/ico/project.png) left no-repeat;}
+a.icon_7{background:url(../images/ico/report.png) left no-repeat;}
+a.icon_8{background:url(../images/ico/users.png) left no-repeat;}
+a.icon_9{background:url(../images/ico/tools.png) left no-repeat;}
+a.icon_10{background:url(../images/ico/file.png) left no-repeat;}
+a.icon_11{background:url(../images/ico/question.png) left no-repeat;}
+#bottom_box{ border-top:2px solid #1b3160; text-align:center; line-height:20px; margin:0px auto; clear:both;}
+
+#quick_menu_box{background:#dee8f4;border:1px solid #cdcdcd; border-bottom:0; height:30px; line-height:30px;  padding:2px;}
+#quick_menu_box a{text-decoration:none; float:left;display: block;}
+#quick_menu_box a:hover{text-decoration:underline;color:#000;}
+#quick_menu_box a img {
+    margin: 6px 3px 0 2px;
+    display: block;
+    float: left;
+}
+#quick_menu_box span {float:left;}

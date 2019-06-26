@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- layout::layout:header_do::0 -->
+    <title>时间&任务管理系统 TTMS--我的任务</title> 
+</head>
+<body>
+<!-- layout::layout:header::0 -->
+	<div id="quick_menu_box">
+		<a href="javascript:;" onclick="window.location.reload();return false;"><img src="Public/Images/ico/refresh.png" style="vertical-align:middle" border="0" />{$Think.lang.refresh}</a>
+		<span style="color:#98c8ff; padding:0 5px;">|</span>
+		<a href="javascript:;" id="task_select" rel="?m=taskNew&a=add_select"><img src="Public/Images/ico/add.png" style="vertical-align:middle" border="0" />添加父级任务</a>
+	</div>
+	<!--搜索区域-->
+	<div id="search_box">
+		<form action="__APP__?m=taskNew&a=index" method="GET" id="task_search" name="task_search">
+			<input type="hidden" id="num" name="num" value="{$num}" />
+			<input type="hidden" id="self" name="self" value="{$self}" />
+			<input type="hidden" id="m" name="m" value="taskNew" />
+			<input type="hidden" id="a" name="a" value="index" />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<label><span>任务优先级:</span> {$task_priority}</label>
+						<label><span>任务状态:</span> {$task_status}</label>
+						<!--<label><span>任务分配人:</span><input size="15" name="assignment" type="text" class="txt" id="assignment" maxlength="50" value="{$assignment}" /></label>-->
+						<?php if($is_admin == '1' && $self == 'myself'){ ?><label><span>任务执行人:</span>{$listparent}</label><?php } ?>
+						<?php if($is_admin == '1' && $self == 'related'){ ?><label><span>任务分配人:</span>{$listparent}</label><?php } ?>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="button"><input type="submit" name="" id="" value="搜索" class="btn" /></div></label>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+<div class="mainblock" style="width:98%;margin: 0 auto;margin-top: 10px;">
+	<div>
+	<span style="float:left" >
+	<input type="button" class="num_button btncancel" id="myself" name="myself" value="本人任务" />
+	<input type="button" class="num_button btncancel" id="related" name="related" value="相关任务" /></span>
+
+	<span style="float:right;margin-top:6px;" >
+	<?php if(!empty($search_list)){ ?>
+		预计总工时：<span style="color:#ff0000;" >{$search_list['man_day']}</span>小时/
+		执行总工时：<span style="color:#ff0000;" >{$search_list['actual_man_day']}</span>小时
+	<?php } ?>
+	<input type="text" style="color:blue;" id="" name="" value="{$date['begin_time']}" disabled/>~~
+	<input type="text" style="color:blue;" id="" name="" value="{$date['end_date']}" disabled/>
+	</span>
+	
+	<center>
+	<input type="button" class="num_button btnsmall" id="prev_num" name="prev_num" value="上一周" />
+	<input type="button" class="num_button btnsmall" id="this_num" name="this_num" value="本周" />
+	<input type="button" class="num_button btnsmall" id="next_num" name="next_num" value="下一周" />
+	</center>
+	</div>
+	<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+			<tr>
+				<th>任务名称</th>
+				<th>优先级</th>
+				<th>状态</th>
+				<th>任务类型</th>
+				<th>分配人</th>
+				<th>执行人</th>
+				<th>预计工时/实际工时</th>
+				<th>开始时间</th>
+				<th>结束时间</th>
+				<th>截止时间</th>
+				<th align="center">操作</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			{volist name="list" id="vo"}
+			<tr>
+				<td>{$vo['task_name']}</td>
+				<td><?php echo $task['task_priority'][$vo['task_priority']]; ?></td>
+				<td><?php echo $task['task_status'][$vo['task_status']]; ?></td>
+				<td><?php echo $task['task_type'][$vo['task_type']]; ?></td>
+				<td>{$vo['assignment']}</td>
+				<td>{$vo['operator']}</td>
+				<td>{$vo['man_day']}&nbsp;/&nbsp;<span style="color:red;">{$vo['actual_man_day']}</span></td>
+				<td>{$vo['begin_time']}</td>
+				<td>{$vo['end_time']}</td>
+				<td>{if condition="$vo['espiration_time'] neq '0000-00-00 00:00:00'"}{$vo['espiration_time']}{/if}</td>
+				<td>
+				<center>
+					<a id="view" title="查看" href="?m=taskNew&a=view&task_id={$vo['task_id']}"><img src="Public/Images/view.png" style="vertical-align:middle" border="0" title="查看"/></a>
+					<?php if(($vo['created_by'] == $user || $user == 'system')){ ?>
+					<a id="delete" title="删除" href="?m=taskNew&a=delete&task_id={$vo['task_id']}"><img src="Public/Images/ico/close_red.gif" style="vertical-align:middle" border="0" title="删除"/></a>
+					<a href="?m=taskNew&a=add&task_id={$vo['task_id']}"><img src="Public/Images/edit.png" style="vertical-align:middle" border="0" title="编辑"/></a>
+					<?php } ?>
+				</center>
+				</td>
+			</tr>
+			<tr id="tr_task_id_{$vo['task_id']}" style="display:none;"><td>&nbsp;</td><td colspan="10" id="{$vo['task_id']}"></td></tr>
+			{/volist}
+		</tbody>
+	</table>
+	<div id="win"></div>
+<center>
+<div class="pageNav">{$page}</div>
+</center>
+</div>
+<!-- layout::layout:footer::0 -->
+</body>
+<script language="javascript">
+$('.num_button').live('click',function(){
+	var id = $(this).attr('id');
+	if(id == 'prev_num'){
+		var num = Number($("#num").val());
+		num = num-1;
+		$("#num").val(num);
+		 document.task_search.submit();
+	}
+	if(id == 'this_num'){
+		$("#num").val('0');
+		document.task_search.submit();
+	}
+	if(id == 'next_num'){
+		var num = Number($("#num").val());
+		num = num+1;
+		$("#num").val(num);
+		document.task_search.submit();
+	}
+	if(id == 'myself'){
+		$("#self").val("myself");
+		document.task_search.submit();
+	}
+	if(id == 'related'){
+		$("#self").val("related");
+		document.task_search.submit();
+	}
+});
+$('a#delete').live('click',function(){
+	var title = $(this).attr('title'); 
+	if(confirm(title+",你确定吗?")) {
+		var url = $(this).attr('href'); 
+		$.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'json',
+			success: function(data){
+				alert(data.data.message);
+				window.location.reload();
+			}
+		});
+	}
+	return false;
+});
+$('#task_select').live('click',function(){
+	var url = $(this).attr('rel');
+	$.ajax({
+		type: 'GET',
+		url: url,
+		dataType: 'html',
+		success: function(data){
+			//console.log(data);
+			if(data){
+				art.dialog({
+					title: '选择你要添加的任务属性',
+					lock: true,
+					content: data
+				});
+			}
+		}
+	});
+	return false;
+});
+$("#check_select").live('click',function(){
+	var value = $(this).val();
+	if(value == 1){
+		window.location.href="__APP__?m=taskNew&a=add"; 
+	}
+	if(value == 3){
+		$("#check").show('slow');
+	}
+});
+</script>
+</html>

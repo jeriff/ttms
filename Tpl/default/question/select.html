@@ -1,0 +1,33 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+            <form action="__APP__?m=question&a=export" method="POST" id="task_add" name="task_add">
+                <table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+                    <tr>
+                        <td>开始时间</td>
+                        <td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});"  name="begin_time" /></td>
+                        <td>结束时间</td>
+                        <td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});"  name="end_time" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input type="submit" id="" name="" class="btn" value="导出" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <script>
+                $("input.Wdate").live('click', function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});	
+            </script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- layout::layout:header_do::0 -->
+    <title>时间&任务管理系统 TTMS--报表管理</title> 
+</head>
+<body>
+<!-- layout::layout:header::0 -->
+	<div id="quick_menu_box">
+		<a href="__APP__?m=Report&a=user_task" ><img src="Public/Images/view.png" style="vertical-align:middle" border="0" />报表查看</a>
+		<span style="color:#98c8ff; padding:0 5px;">|</span>
+		<a href="javascript:;" onclick="window.location.reload();return false;"><img src="Public/Images/ico/refresh.png" style="vertical-align:middle" border="0" />{$Think.lang.refresh}</a>
+	</div>
+	<!--搜索区域-->
+	<div id="search_box">
+		<form action="__APP__?m=Report&a=task_export" method="GET" id="task_export" name="task_export">
+			<input type="hidden" id="m" name="m" value="Report" />
+			<input type="hidden" id="a" name="a" value="task_export" />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<!--<label><span>频率:</span> {$task_frequency}</label>-->
+						<span>导出类型:</span><label>
+						{$export_type}
+						</label>
+						<span>任务执行人:</span><label>
+						{$listparent}
+						</label>
+						<span>任务时间:</span><label>
+						<input type="text" id="week_time" name="week_time" class="Wdate" onFocus="WdatePicker({isShowWeek:true,dateFmt:'yyyy-M-d DD WW'})" value="{$week_time}"/>
+						</label>
+						<div class="button"><input type="submit" name="" id="" value="导出" class="btn" /></div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+<div class="mainblock" style="width:98%;margin: 0 auto;margin-top: 10px;">
+	<table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+			<tr>
+				<th>导出类型</th>
+				<th>文件名称</th>
+				<th>导出范围</th>
+				<th>数据开始时间</th>
+				<th>数据结束时间</th>
+				<th>导出时间</th>
+				<th>导出人</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="list" id="vo"}
+			<tr>
+				<td>{$vo['type']}</td>
+				<td><a href="{$vo['url']}" >{$vo['filename']}</a></td>
+				<td>{$vo['name']}</td>
+				<td>{$vo['start_time']}</td>
+				<td>{$vo['end_time']}</td>
+				<td>{$vo['modified']}</td>
+				<td>{$vo['modified_by']}</td>
+			</tr>
+			{/volist}
+		</tbody>
+	</table>
+	<center>
+	<div class="pageNav">{$page}</div>
+	</center>
+</div>
+<!-- layout::layout:footer::0 -->
+</body>
+</html>

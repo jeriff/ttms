@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- layout::layout:header_do::0 -->
+        <title>{$Think.config.title_oms_version}--项目管理</title>
+        <script>
+            $("input.Wdate").live('click', function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+        </script>
+
+    </head>
+    <body>
+        <!-- layout::layout:header::0 -->
+        <div id="quick_menu_box" style="border-bottom:1px solid #81afd9;">
+            <a onclick="window.location.reload();return false;"><img src="Public/Images/ico/refresh.png" style="vertical-align:middle" border="0" />{$Think.lang.refresh}</a>
+        </div>
+
+        <form action="?m=server&a=add_server" method="POST">
+            <table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1" style="margin: 0 auto;margin-top: 10px;margin-bottom: 20px;width:98%;">
+                <tbody><tr>
+                        <td align="left" width="150" class="td_left">服务器名称：</td>
+                        <td><input type="text" id="server_name" name="server_name" value="{$server.server_name}" />
+                            <span class="require-field">*</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">服务器地址(IP)：</td>
+                        <td><input type="text" id="server_ip" name="server_ip" maxlength="15" value="{$server.server_ip}"/>
+                            <span class="require-field">*格式(192.168.123.321)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">服务器类型：</td>
+                        <td>{$server_type}
+                            <span class="require-field">*</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">服务器站点：</td>
+                        <td>{$server_site}
+                            <span class="require-field">*</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">服务器状态：</td>
+                        <td>{$server_status}
+                            <span class="require-field">*</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">服务器信息：</td>
+                        <td><textarea class="txtarea " id="server_info" name="server_info" style="width:250px; height:100px;">{$server.server_info}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left">备注：</td>
+                        <td><textarea class="txtarea " id="server_remark" name="server_remark" style="width:250px; height:50px;">{$server.server_remark}</textarea></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="hidden" name="server_id" value="{$server.server_id}"/>
+                            <?php if($a =='edit'){ ?>
+                            <input type="submit" name="submit" id="save" value="保存" class="btn" />
+                            <input type="button" name="submit"  value="返回" class="btncancel" />
+                            <?php  } else if($a == 'view'){ ?>
+                            <input type="button" name="submit"  value="返回" class="btncancel" />
+                            <?php }else if($a =='add'){ ?>
+                            <input type="submit" name="submit" id="add" value="添加" class="btn" />
+                            <input type="button" value="取消" class="btncancel" />
+                            <?php } ?>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </form>
+
+        <!-- layout::layout:footer::0 -->
+    </body>
+    <script>
+        $('.btncancel').live('click',function(){
+            window.location = '?m=server&a=index';
+            return false;
+        });
+        $('.btn').live('click',function(){
+            if($('#server_name').val()==''){
+                art.dialog({
+                    title: '消息',
+                    content: '服务器名称不能为空',
+                    okValue:'确定',
+                    lock: true,
+                    ok: function(){
+                        return true;
+                    }
+                });
+                return false;
+            }
+            else if($('#server_ip').val()==''){
+                art.dialog({
+                    title: '消息',
+                    content: '服务器IP地址不能为空',
+                    okValue:'确定',
+                    lock: true,
+                    ok: function(){
+                        return true;
+                    }
+                });
+                return false;
+            }
+            else if($('INPUT[NAME="server_type[]"]:checked').length ==0){
+                art.dialog({
+                    title: '消息',
+                    content: '请选择服务器类型',
+                    okValue:'确定',
+                    lock: true,
+                    ok: function(){
+                        return true;
+                    }
+                });
+                return false;
+            }
+
+            if($('#server_site').val()==''){
+                art.dialog({
+                    title: '消息',
+                    content: '请选择服务器站点',
+                    okValue:'确定',
+                    lock: true,
+                    ok: function(){
+                        return true;
+                    }
+                });
+                return false;
+            }
+             if($('#server_status').val()==''){
+                art.dialog({
+                    title: '消息',
+                    content: '请选择服务器状态',
+                    okValue:'确定',
+                    lock: true,
+                    ok: function(){
+                        return true;
+                    }
+                });
+                return false;
+            }
+        });
+    </script>
+</html>

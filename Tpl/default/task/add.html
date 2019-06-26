@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- layout::layout:header_do::0 -->
+    <title>时间&任务管理系统 TTMS--任务添加</title>
+<style type="text/css">
+	.project_width label {display:block;float:left;}
+	.project_width br {clear:both;}
+</style>
+</head>
+<body>
+<!-- layout::layout:header::0 -->
+<div id="quick_menu_box" style="border-bottom:1px solid #81afd9;">
+<h3 style="margin-top:0px;color:#0c3a86;">任务添加</h3>
+</div>
+<div class="mainblock">
+<form action="__APP__?m=task&a=add" method="POST" id="task_add" name="task_add">
+<?php if(!empty($add_seed_value) && $add_seed_value['act'] == 'save'){ ?>
+	<input type="hidden" id="task_id" name="task_id" value="{$add_seed_value['task_id']}" />
+<?php }else if(!empty($add_seed_value) && $add_seed_value['act'] == 'add'){ ?>
+	<input type="hidden" id="parent_id" name="parent_id" value="{$add_seed_value['task_id']}" />
+<?php } ?>
+	<input type="hidden" id="act" name="act" value="{$add_seed_value['act']}" />
+	<input type="hidden" id="last_man_day" name="last_man_day" value="{$last_man_day}" />
+<table style="width:98%;margin: 0 auto;margin-top: 10px;" id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+	<tr>
+		<td>任务名称：</td>
+		<td><input type="text" id="task_name" name="task_name" value="{$add_seed_value['task_name']}"/></td>
+		<td>任务范围：</td>
+		<td>{$task_biling_type}</td>
+	</tr>
+	<tr>
+		<td>所属项目：</td>
+		<td colspan="3" class="project_width">{$project}</td>
+	</tr>
+	<tr>
+		<td>是否收费：</td>
+		<td>{$task_biling} <span id="task_biling_money" style="display:none">收费标准：{$task_biling_money}</span></td>
+		<td>任务进度：</td>
+		<td>{$task_attribute}</td>
+	</tr>
+	<tr>
+		<td>开始时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="begin_time" name="begin_time" onchange="in_time();" value="{$add_seed_value['begin_time']}"/></td>
+		<td>结束时间：</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="end_time" name="end_time" value="{$add_seed_value['end_time']}"/></td>
+	</tr>
+	<tr>
+		<td>预计工时：</td>
+		<td><input type="text" id="man_day" name="man_day" onchange="in_time();" value="{$add_seed_value['man_day']}" />
+		<?php if(!empty($add_seed_value) && $add_seed_value['act'] == 'add'){ ?>
+		<span style="color:red;">预计剩余工时为：{$last_man_day} 小时</span>
+		<?php } ?>
+		</td>
+		<td>截止时间</td>
+		<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="espiration_time" name="espiration_time" value="{$add_seed_value['espiration_time']}"/></td>
+	</tr>
+	<tr>
+		<td>类别：</td>
+		<td colspan="3" class="project_width" >{$task_category}</td>
+	</tr>
+	<tr>
+		<td>优先级：</td>
+		<td>{$task_priority}</td>
+		<td>类型：</td>
+		<td>{$task_type}</td>
+	</tr>
+	<tr>
+		<td>状态：</td>
+		<td>{$task_status}</td>
+		<td>执行人：</td>
+		<!--<td><textarea id="operator_user" name="operator_user" disabled ></textarea></td>-->
+		<td>{$operator}</td>
+	</tr>
+	<!--<tr>
+		<td>执行人：</td>
+		<td><textarea id="operator_user" name="operator_user" disabled ></textarea></td>
+		<td colspan="2">{$operator}</td>
+	</tr>-->
+	<tr>
+		<td>任务描述：</td>
+		<td><textarea style="width:95%;height:100px;" id="task_subject" name="task_subject">{$add_seed_value['task_subject']}</textarea></td>
+		<td>备注：</td>
+		<td><textarea style="width:95%;height:100px;" id="remark" name="remark">{$add_seed_value['remark']}</textarea></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+		<center>
+		<?php if(!empty($add_seed_value) && $add_seed_value['act'] == 'save'){ ?>
+			<input type="submit" class="btn" id="" name="" value="保存"/>
+		<?php }else{ ?>
+			<input type="submit" class="btn" id="" name="" value="提交"/>
+		<?php } ?>
+		<input type="button" class="btncancel" onclick="window.location = '?m=task&a=index'" id="" name="" value="返回" />
+		</center>
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+<script>
+$("input.Wdate").live('click', function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+/*$("input#operator").live('click',function(){
+	selete_user();
+});
+$(document).ready(function(){
+	selete_user();
+});
+function selete_user(){
+	var str=document.getElementsByName('operator[]');
+	var objarray=str.length;
+	var chestr="";
+	for (i=0;i<objarray;i++)
+	{
+		if(str[i].checked == true)
+		{
+			chestr += str[i].value+",";
+		}
+	}
+	$("#operator_user").text(chestr);
+}*/
+$('#task_add').live('submit',function(){
+	//任务名称不能为空
+	var task_name = $("#task_name").val();
+	if(task_name == ''){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '任务名称不能为空~'
+		});
+		$("#task_name").focus();
+		return false;
+	}
+	//任务范围不能为空
+	var task_biling_type = $("input[name='task_biling_type']:checked").val();
+	if(!task_biling_type){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '任务范围不能为空~'
+		});
+		return false;
+	}
+	//任务优先级
+	var task_priority = $("input[name='task_priority']:checked").val();
+	if(!task_priority){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请选择任务优先级~'
+		});
+		return false;
+	}
+	//任务类别
+	var task_category = $("input[name='task_category']:checked").val();
+	if(!task_category){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请选择任务类别~'
+		});
+		return false;
+	}
+	//任务类型
+	var task_type = $("input[name='task_type']:checked").val();
+	if(!task_type){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请选择任务类型~'
+		});
+		return false;
+	}
+	//任务描述
+	var task_subject = $("#task_subject").val();
+	if(task_subject == ''){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请对任务进行描述~'
+		});
+		return false;
+	}
+	var begin_time = $("#begin_time").val();
+	var end_time = $("#end_time").val();
+	var espiration_time = $("#espiration_time").val();
+	if(begin_time == '' || end_time == '' || espiration_time == ''){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '请输入时间！~~'
+		});
+		return false;
+	}
+	if(begin_time > end_time){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '开始时间不能小于结束时间！~~'
+		});
+		$("#end_time").focus();
+		return false;
+	}
+	if(end_time > espiration_time){
+		art.dialog({
+			title: '警告',
+			lock: true,
+			time: 4000,
+			content: '截止时间不能小于结束时间！~~'
+		});
+		$("#espiration_time").focus();
+		return false;
+	}
+
+});
+$(document).ready(function(){
+	if($("#task_biling").checked){
+		var money = $("#task_biling").val();
+	}
+	if(money == 1){
+		$("#task_biling_money").show();
+	}else{
+		$("#task_biling_money").hide();
+	}
+});
+$("#task_biling").live('click',function(){
+	var money = $(this).val();
+	if(money == 1){
+		$("#task_biling_money").show();
+	}else{
+		$("#task_biling_money").hide();
+	}
+});
+function in_time(){
+	var operator = $('#operator').val();
+	if(operator == 'jason.guo'){
+		var begin_time = $("#begin_time").val();
+		var man_day = $("#man_day").val();
+		if(begin_time != '' && man_day != ''){
+			var str = begin_time;
+			var new_str = str.replace(/:/g,'-');
+			new_str = new_str.replace(/ /g,'-');
+			var arr = new_str.split("-");
+			var datum = new Date(Date.UTC(arr[0],arr[1]-1,arr[2],arr[3]-8,arr[4],arr[5]));
+			//document.write("<br><b>转换后的UNIX时间戳为</b>: "+(datum.getTime()/1000));
+			var aInterval = man_day.split(".");
+			aInterval[0] = parseInt(aInterval[0]);
+			if(aInterval.length == 2){
+				aInterval[1] = parseInt(aInterval[1]);
+				var iInterval = (60*aInterval[0] + aInterval[1]*6) * 60 * 1000;
+			}else{
+				var iInterval = 60*aInterval[0] * 60 * 1000;
+			}
+			var datum = new Date(datum.getTime() + iInterval);
+			var end_time = datum.toLocaleString();
+			end_time = end_time.replace(/年/g,'-');
+			end_time = end_time.replace(/月/g,'-');
+			end_time = end_time.replace(/日/g,'');
+			$("#end_time").val(end_time);
+			var datum = new Date(datum.getTime() + (1 * 60 * 60 * 1000));
+			var espiration_time = datum.toLocaleString();
+			espiration_time = espiration_time.replace(/年/g,'-');
+			espiration_time = espiration_time.replace(/月/g,'-');
+			espiration_time = espiration_time.replace(/日/g,'');
+			$("#espiration_time").val(espiration_time);
+		}
+	}
+}
+</script>
+<!-- layout::layout:footer::0 -->
+</body>
+
+</html>

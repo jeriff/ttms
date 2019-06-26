@@ -1,0 +1,35 @@
+<div>
+<form action="__APP__?m=task&a=edit" method="POST" id="task_edit" name="task_edit">
+	<input type="hidden" id="task_id" name="task_id" value="{$task_id}" />
+	<input type="hidden" id="parent_id" name="parent_id" value="{$edit['parent_id']}" />
+	<input type="hidden" id="assignment" name="assignment" value="{$edit['assignment']}" />
+	<table id="myListTable" width="100%" class="tablesorter" border="0" cellpadding="0" cellspacing="1" style="width:98%;margin: 0 auto;margin-top: 10px;">
+		<tr>
+			<td>任务状态：</td>
+			<td>{$task_status}</td>
+			<td>完成时间：</td>
+			<td><input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" id="over_time" name="over_time" value="{$edit['over_time']}"/></td>
+		</tr>
+		<tr>
+			<td>实际执行时间：</td>
+			<td><input type="text" id="actual_man_day" name="actual_man_day" value="{$edit['actual_man_day']}" /></td>
+			<td>追加备注：</td>
+			<td><textarea id="remark" name="remark">{$edit['remark']}</textarea></td>
+		</tr>
+		<?php if($edit['operator'] == $_COOKIE[C('COOKIE_PREFIX') . 'username']){ ?>
+		<tr>
+			<td>执行人：</td>
+			<!--<td><textarea id="operator_user" name="operator_user" disabled ></textarea></td>-->
+			<td colspan="3">{$operator}</td>
+		</tr>
+		<?php } ?>
+		<tr>
+			<td colspan="4">
+			<center>
+			<input type="submit" id="" name="" class="btn" value="提交" />
+			</center>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>

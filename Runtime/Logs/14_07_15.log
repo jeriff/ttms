@@ -1,0 +1,4 @@
+[ 2014-07-15T11:11:17+08:00 ] ERR: (ThinkException) Can't connect to MySQL server on 'localhost' (10061)
+[ 2014-07-15T11:27:16+08:00 ] ERR: (ThinkException) Can't connect to MySQL server on 'localhost' (10061)
+[ 2014-07-15T11:27:21+08:00 ] ERR: (ThinkException) Can't connect to MySQL server on 'localhost' (10061)
+[ 2014-07-15T11:27:25+08:00 ] ERR: (ThinkException) Can't connect to MySQL server on 'localhost' (10061)

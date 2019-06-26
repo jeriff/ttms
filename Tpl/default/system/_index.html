@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- layout::layout:header_do::0 -->
+        <title>{$Think.config.title_oms_version}--项目管理</title>
+
+    </head>
+    <body>
+        <!-- layout::layout:header::0 -->
+        <div style="width: 100%;">
+            <div style="width:900px;;margin: 0 auto;margin-bottom: 10px;margin-top: 10px;">
+                <form action="__APP__?m=system&a=edit" method="POST">
+                    <table>
+                        <tr>
+                            <td>config.php:</td> <td><textarea class="txtarea " id="config" name="config" style="width:900px; height:340px;">{$file}</textarea>
+                            </td></tr>
+                        <tr>
+                                <td>status.inc.php:</td><td><textarea class="txtarea " id="status" name="status" style="width:900px; height:340px;">{$file_inc}</textarea>
+                            </td></tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                 <input type="submit" name="submit" id="add" value="保存" class="btn" />
+                                 <input type="button" value="取消" class="btncancel" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+            <script>
+        $('.btncancel').live('click',function(){
+            window.location = '?m=index&a=index';
+            return false;
+        });
+        </script>
+        <!-- layout::layout:footer::0 -->
+    </body>
+</html>

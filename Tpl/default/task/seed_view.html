@@ -1,0 +1,48 @@
+<?php if(!empty($seed_task)){ ?>
+<div>
+	<table id="myListTable" width="100%" class="tablesorter" border="0" cellpadding="0" cellspacing="1" style="width:98%;margin: 0 auto;margin-top: 10px;">
+		<thead>
+			<tr>
+				<th>任务名称</th>
+				<th>优先级</th>
+				<th>状态</th>
+				<th>任务类型</th>
+				<th>分配人</th>
+				<th>执行人</th>
+				<th>预计工时/实际工时</th>
+				<th>开始时间</th>
+				<th>结束时间</th>
+				<th>截止时间</th>
+				<th align="center">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="seed_task" id="vo"}
+			<tr>
+				<td>{$vo['task_name']}</td>
+				<td><?php echo $task['task_priority'][$vo['task_priority']]; ?></td>
+				<td><?php echo $task['task_status'][$vo['task_status']]; ?>
+				<?php if($vo['created_by'] == $user || $vo['operator'] == $user || stristr($vo['assignment'],$user)){ ?>
+				<a id="edit" title="更新状态" rel="?m=task&a=edit&task_id={$vo['task_id']}"><img src="Public/Images/ico/update.jpg" style="vertical-align:middle" border="0" align='right' title="更新状态"/></a>
+				<?php } ?></td>
+				<td><?php echo $task['task_type'][$vo['task_type']]; ?></td>
+				<td>{$vo['assignment']}</td>
+				<td>{$vo['operator']}</td>
+				<td>{$vo['man_day']}&nbsp;/&nbsp;<span style="color:red;">{$vo['actual_man_day']}</span></td>
+				<td>{$vo['begin_time']}</td>
+				<td>{$vo['end_time']}</td>
+				<td>{if condition="$vo['espiration_time'] neq '0000-00-00 00:00:00'"}{$vo['espiration_time']}{/if}</td>
+				<td>
+				<center>
+					<a id="view" title="查看" href="?m=task&a=view&task_id={$vo['task_id']}"><img src="Public/Images/view.png" style="vertical-align:middle" border="0" title="查看"/></a>
+					<?php if($vo['created_by'] == $user){ ?>
+					<a id="delete" title="删除" href="?m=task&a=delete&task_id={$vo['task_id']}"><img src="Public/Images/ico/close_red.gif" style="vertical-align:middle" border="0" title="删除"/></a>
+					<?php } ?>
+				</center>
+				</td>
+			</tr>
+			{/volist}
+		</tbody>
+	</table>
+</div>
+<?php } ?>

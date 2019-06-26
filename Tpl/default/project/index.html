@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- layout::layout:header_do::0 -->
+        <title>{$Think.config.title_oms_version}--项目管理</title>
+        <script>
+            $("input.Wdate").live('click', function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+        </script>
+
+    </head>
+    <body>
+        <!-- layout::layout:header::0 -->
+        <div id="quick_menu_box">
+            <a onclick="window.location.reload();return false;"><img src="Public/Images/ico/refresh.png" style="vertical-align:middle" border="0" />{$Think.lang.refresh}</a>
+            <span style="color:#98c8ff; padding:0 5px;">|</span>
+            <a href="?m=project&a=add_project&type=add"><img src="Public/Images/ico/add.png" style="vertical-align:middle" border="0" />{$Think.lang.add}</a>
+        </div>
+
+        <!--搜索区域-->
+        <div id="search_box">
+            <form action="__APP__?m=project&a=index" method="GET" id="project_search" name="project_search">
+                <input type="hidden" id="m" name="m" value="project"/>
+                <input type="hidden" id="a" name="a" value="index"/>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <label><span>{$Think.lang.project_site}:</span> {$project_site}</label>
+                            <label><span>{$Think.lang.project_status}:</span> {$project_status}</label>
+                            <label><span>{$Think.lang.project_ontime}:</span> <input size="15" name="project_ontime" type="text" class="Wdate"  maxlength="50" value="{$project_ontime}" /></label>
+                            <label><span>{$Think.lang.server_ip}:</span> {$server_ip}</label>
+                            <br/>
+                            <label style="width:225px;"><span>{$Think.lang.project_name}:</span> <input size="15" name="project_name" type="text" class="txt" id="tid" maxlength="50" value="{$project_name}" /></label>
+                            <div class="button"><input type="submit" name="" id="" value="{$Think.lang.search}" class="btn" /></div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!--列表开始-->
+        <table id="myListTable" class="tablesorter" border="0" cellpadding="0" cellspacing="1" style="width:98%;margin: 0 auto;margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th>{$Think.lang.project_name}</th>
+                    <th>{$Think.lang.project_site}</th>
+                    <th>{$Think.lang.project_status}</th>
+                    <th>{$Think.lang.project_ontime}</th>
+                    <th>{$Think.lang.project_offlinetime}</th>
+                    <th>{$Think.lang.server_ip}</th>
+                    <th>{$Think.lang.create} / {$Think.lang.project_last_status_by}</th>
+                    <th align="center">{$Think.lang.action}</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td>{$vo.project_name}</td>
+                    <td><?php echo $server['server_site'][$vo['project_site']]; ?></td>
+                    <td><?php echo $status['project_status'][$vo['project_status']]; ?></td>
+                    <td>{$vo.project_ontime}</td>
+                    <td>{if condition=" $vo.project_status =='4'" }{$vo.project_offlinetime}{/if}</td>
+                    <td>{$vo.server_ip}</td>
+                    <td>{$vo.created_by} / {$vo.modified_by}</td>
+                    <td align="center">
+                        <a  href='?m=project&a=add_project&project_id={$vo.project_id}&type=edit' title=""><img title="{$Think.lang.edit}" src="public/images/edit.png" border="0" align="absmiddle" /></a>
+                        <a  href='?m=project&a=add_project&project_id={$vo.project_id}&type=view' title=""><img title="{$Think.lang.view}" src="public/images/view.png" border="0" align="absmiddle" /></a>
+                        <a id="delete" title="删除" href="?m=project&a=delete&project_id={$vo.project_id}&type=delete"><img src="Public/Images/ico/close_red.gif" style="vertical-align:middle" border="0" title="删除"/></a>
+						<a title="相关文档" href="?m=Document&a=index&project_name=<?php echo urlencode($vo['project_name']);?>"><img src="Public/Images/ico/images.jpg" style="vertical-align:middle" border="0" title="相关文档"/></a>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+        </form>
+        <center style="margin-bottom: 20px;">
+            <div class="pageNav">{$page}</div>
+        </center>
+        <!-- layout::layout:footer::0 -->
+    </body>
+    <script>
+        $('#delete').live('click',function(){
+            if(confirm("你确定要删除此项目吗?")){
+                return ture;
+            }else
+            {
+                return false;
+            }
+        });
+    </script>
+</html>

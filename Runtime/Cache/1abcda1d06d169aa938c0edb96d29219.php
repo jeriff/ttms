@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><div id="bottom_box"><?php echo (C("title_all_rights")); ?></div>

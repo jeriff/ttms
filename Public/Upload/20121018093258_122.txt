@@ -1,0 +1,10 @@
+1.需要在呼入弹屏页面 显示客户的简单信息，历史记录
+2.sv_id,sv_result
+3.caselog中report_content字段
+4.caselog中关于email以什么符号分割
+5.wid
+
+
+201209aimer-cshift456
+
+201209aimer-c$%^

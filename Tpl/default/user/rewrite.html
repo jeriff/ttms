@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- layout::layout:header_do::0 -->
+        <title>{$Think.config.title_oms_version}--修改资料</title>
+
+    </head>
+    <body>
+        <!-- layout::layout:header::0 -->
+        <div style="border-bottom:1px solid #81afd9;" id="quick_menu_box">
+            <a onclick="window.location.reload();return false;"><img src="Public/Images/ico/refresh.png" style="vertical-align:middle" border="0" />{$Think.lang.refresh}</a>
+            <span style="color:#98c8ff; padding:0 5px;">|</span>
+            <a href="?m=purview&a=add_user"><img src="Public/Images/ico/add.png" style="vertical-align:middle" border="0" />添加用户</a>
+            <span style="color:#98c8ff; padding:0 5px;">|</span>
+            <a href="?m=purview&a=index"><img src="Public/Images/ico/add.png" style="vertical-align:middle" border="0" />用户列表</a>
+        </div>
+
+
+                      
+            <form action="" method="POST" id="" name="">
+                <table cellspacing="1" cellpadding="0" border="0" style="width:98%;margin: 0 auto;margin-top: 10px;" class="tablesorter"  id="myListTable">
+                <tbody>
+                    <input type="hidden" name="userid" value="{$select_user.userid}">
+                    <tr>
+                        <td align="left" class="td_left" style="">用户名：</td>
+                        <td style="">
+                            <input readonly type="text"  name="username" size="20" value="{$user_detail.username}">
+                            <span class="require-field">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left" style="">旧密码：</td>
+                        <td style=""><input type="text" readonly  name="old_password" size="20" value="{$user_detail.password}">
+                            <span class="require-field">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="td_left" style="">新密码：</td>
+                        <td style=""><input type="text"  name="new_password" size="20" value="">
+                            <span class="require-field">*</span>
+                        </td>
+                    </tr>
+                  
+                        
+                <tr>
+                    <td align="center" colspan="2">
+                <label>
+                    <input type="submit" class="btn" value="修改">
+                    
+                </label>
+                     </td>
+                </tr>
+
+                </talbe>
+            </form>
+
+ 
+
+        <div style="clear:both"></div>
+        
+
+    </body>
+</html>
